@@ -1,6 +1,6 @@
-# Cloud Computing Labs 2026
+# Cloud Computing Labs 2026 - Edward Emmett
 
-This repository contains the weekly lab material for Cloud Computing and Cloud Computing Concepts.
+This repository contains the weekly lab material for Cloud Computing and Cloud Computing Concepts, along with Edward Emmett's solutions and homework.
 
 ## Current Material
 
