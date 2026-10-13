@@ -27,9 +27,21 @@ Use the official Postman site only.
 
 Postman supports Windows, macOS, and Linux. The official installation guide says to download the latest desktop app from the Postman download page and choose the option for your operating system.
 
+For installation steps specific to your system, follow the [official Postman installation guide](https://learning.postman.com/docs/getting-started/installation/install-app/).
+
+Use the **desktop app** for this homework so you can send requests directly to your local API at `127.0.0.1`.
+
 3. Install and open Postman.
 
 You may be asked to create or sign in to a Postman account. Follow the screen instructions.
+
+#### Watch the Basics First
+
+Watch [How to Send Your First API Request in Postman](https://www.youtube.com/watch?v=2oOSnxZ28fA), published on **Postman's official YouTube channel** (about 9 minutes).
+
+Focus on creating a request, sending a GET request, and reading the JSON response. The video demonstrates a different API; for this homework, use your Notes API and the URLs below.
+
+The video uses an earlier Postman interface, so some buttons may look different. The [current official quick-start guide](https://learning.postman.com/docs/getting-started/quick-start) provides an up-to-date reference.
 
 #### Part B: Start Your API
 
@@ -43,11 +55,11 @@ You may be asked to create or sign in to a Postman account. Follow the screen in
 uvicorn main:app --reload
 ```
 
-Keep the server running while you use Postman.
+Keep the server running while you use Postman. If the API is already running, skip the second start command. An `Address already in use` error means another process is using port `8000`.
 
 #### Part C: Send a GET Request
 
-7. In Postman, create a new request.
+7. In Postman, open a new HTTP request tab using **Add** (the **+** button) in the workbench.
 
 8. Set the method to:
 
@@ -63,7 +75,7 @@ http://127.0.0.1:8000/notes
 
 10. Click **Send**.
 
-You should see a JSON response. If there are no notes yet, you may see:
+Expect status **200** and a JSON list. If there are no notes yet, you may see:
 
 ```json
 []
@@ -102,7 +114,7 @@ http://127.0.0.1:8000/notes
 
 18. Click **Send**.
 
-You should see a response with an `id`, `title`, and `text`.
+Expect status **201** and a response with an `id`, `title`, and `text`. Copy the returned `id` for the next requests. IDs do not restart at `1` when notes are deleted, so do not assume your new note has ID `1`.
 
 #### Part E: Send a PATCH Request
 
@@ -120,7 +132,7 @@ PATCH
 http://127.0.0.1:8000/notes/1
 ```
 
-If your note has a different ID, replace `1` with your note ID.
+Replace `1` with the exact `id` returned by your POST request.
 
 22. Open the **Body** tab.
 
@@ -136,7 +148,7 @@ If your note has a different ID, replace `1` with your note ID.
 
 25. Click **Send**.
 
-You should see the updated note.
+Expect status **200** and the updated note. The original text should remain unchanged because you sent only a title.
 
 #### Part F: Send a DELETE Request
 
@@ -154,17 +166,17 @@ DELETE
 http://127.0.0.1:8000/notes/1
 ```
 
-If your note has a different ID, replace `1` with your note ID.
+Replace `1` with the exact `id` returned by your POST request.
 
 29. Click **Send**.
 
-You should see:
+Expect status **200** and:
 
 ```json
 {"message":"Note deleted"}
 ```
 
-30. Send `GET /notes` again to check that the note is gone.
+30. Send `GET /notes` again to check that this note is gone. Other notes may still be listed. Also request the deleted ID with `GET /notes/{note_id}`; expect **404** and `{"detail":"Note not found"}`.
 
 #### Part G: Stop the Server
 
@@ -176,7 +188,13 @@ You should see:
 Ctrl + C
 ```
 
-#### Checklist
+#### Troubleshooting
+
+- **Connection refused / could not send request:** check that Uvicorn is running and the URL uses `http://127.0.0.1:8000`.
+- **`422` after POST:** check that the body is set to raw JSON and contains both `title` and `text` as strings.
+- **`404` after PATCH or DELETE:** use the ID from your POST response and check that the note has not already been deleted.
+
+#### Submission Checklist
 
 Before you finish, make sure:
 
@@ -187,4 +205,4 @@ Before you finish, make sure:
 - `DELETE /notes/{note_id}` deletes a note.
 - You can find the response status code in Postman.
 
-Homework 2 is complete. Week 2 is complete.
+Homework 2 is complete. Follow the [homework submission instructions](submission.md) to share your public repository in Teams for feedback, then complete the [Weekend Activity: Cloud and AI](../lab/weekend-activity.md).
