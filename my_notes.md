@@ -28,3 +28,19 @@ find . -type d -name ".venv"
 ```
 ls -d */
 ```
+
+#### double up single quotes to escape them in SQL strings:
+```
+'Gravity''s Rainbow'
+```
+
+### edit Git config file (Powershell):
+```
+git config --global -e
+```
+
+### and add new alias under [alias]
+```
+[alias]
+    acp = "!f() { git add . && git commit -m \"$1\" && git push origin main; }; f"
+```
