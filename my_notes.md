@@ -23,3 +23,8 @@ rm -rf: The standard Linux remove command. -r (recursive) is required to delete 
 ```
 find . -type d -name ".venv"
 ```
+
+## show only directories in cwd:
+```
+ls -d */
+```
