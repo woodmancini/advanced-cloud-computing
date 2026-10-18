@@ -134,4 +134,4 @@ def delete_note(note_id: int):
     connection.commit()
     connection.close()
 
-    return {"message:","Note deleted"}
+    return {"message":"Note deleted"}
