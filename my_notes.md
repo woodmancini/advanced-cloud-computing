@@ -44,3 +44,8 @@ git config --global -e
 [alias]
     acp = "!f() { git add . && git commit -m \"$1\" && git push origin main; }; f"
 ```
+
+### pull from upstream repo while defaulting to their (changed) versions of files
+```
+git pull upstream main -X theirs
+```
